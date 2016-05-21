@@ -5,6 +5,11 @@ node_js:
   - "5"
   - "6"
 
+env:
+  - BROWSER_NAME=firefox
+  - BROWSER_NAME=chrome
+  - BROWSER_NAME=ie
+
 before_script:
   - npm run lint
   - sleep 15
