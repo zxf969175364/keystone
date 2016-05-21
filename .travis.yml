@@ -8,7 +8,7 @@ node_js:
 env:
   - BROWSER_NAME="firefox" PLATFORM="Linux"
   - BROWSER_NAME="chrome" PLATFORM="Linux"
-  - BROWSER_NAME="ie" PLATFORM="Windows 10"
+  - BROWSER_NAME="internet explorer" PLATFORM="Windows 10"
 
 before_script:
   - npm run lint
