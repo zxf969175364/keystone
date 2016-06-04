@@ -1,6 +1,6 @@
 {
-  "name": "keystone",
-  "version": "0.3.20",
+  "name": "keystone_oss",
+  "version": "0.3.33",
   "description": "Web Application Framework and Admin GUI / Content Management System built on Express.js and Mongoose",
   "main": "index.js",
   "repository": {
@@ -8,6 +8,7 @@
     "url": "https://github.com/zxf969175364/keystone.git"
   },
   "dependencies": {
+    "aliyun-sdk": "^1.9.1",
     "async": "^1.5.2",
     "asyncdi": "^1.1.0",
     "azure": "^0.10.6",

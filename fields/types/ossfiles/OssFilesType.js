@@ -296,8 +296,7 @@ ossfiles.prototype.uploadFiles = function(item, files, update, callback) {
 
 	async.map(files, function(file, processedFile) {
 
-		var prefix = field.options.datePrefix ? moment().format(field.options.datePrefix) + '-' : '',
-			object,
+		var prefix = field.options.dir || '',
 			filename = prefix + file.name,
 			filetype = file.mimetype || file.type;
 
@@ -326,7 +325,9 @@ ossfiles.prototype.uploadFiles = function(item, files, update, callback) {
 				var options = _.extend({
 					Bucket: "",
 					Key:filename,
-					Body:data
+					Body:data,
+					ContentType: filetype,
+					Expires: null
 				},field.options.oss_upload);
 
 				field.oss.putObject(options,function(err,data){

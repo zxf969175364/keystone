@@ -23,7 +23,7 @@ html
 		#wrap
 			nav(role='navigation')#header.navbar.navbar-default.navbar-static-top: .container
 				a(href=backUrl).navbar-backtobrand-trigger.hidden-xs: span.ion-arrow-left-c
-				.navbar-backtobrand-message Back to the #{brand} website
+				.navbar-backtobrand-message 返回 #{brand} 网站
 				.navbar-header
 					button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-headernav-collapse')
 						span.sr-only Toggle section navigation
@@ -35,7 +35,7 @@ html
 					if signout
 						ul.nav.navbar-nav.navbar-right
 							li.divider
-							li: a(href=signout).signout Sign Out
+							li: a(href=signout).signout 登出
 					ul.nav.navbar-nav
 						each navSection in nav.sections
 							if navSection.lists[0].external

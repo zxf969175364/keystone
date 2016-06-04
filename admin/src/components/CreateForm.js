@@ -126,15 +126,15 @@ var Form = React.createClass({
 							<input type="hidden" name={Keystone.csrf.key} value={Keystone.csrf.value} />
 							<div className="modal-header">
 								<button type="button" className="modal-close" onClick={this.props.onCancel}></button>
-								<div className="modal-title">Create a new {list.singular}</div>
+								<div className="modal-title">创建一个 {list.singular}</div>
 							</div>
 							<div className="modal-body">
 								{errors}
 								{form}
 							</div>
 							<div className="modal-footer">
-								<button type="submit" className="btn btn-create">Create</button>
-								<button type="button" className="btn btn-link btn-cancel" onClick={this.props.onCancel}>cancel</button>
+								<button type="submit" className="btn btn-create">创建</button>
+								<button type="button" className="btn btn-link btn-cancel" onClick={this.props.onCancel}>取消</button>
 							</div>
 						</form>
 					</div>

@@ -5,7 +5,7 @@ var _ = require('underscore'),
 
 var ICON_EXTS = [
 	'aac', 'ai', 'aiff', 'avi', 'bmp', 'c', 'cpp', 'css', 'dat', 'dmg', 'doc', 'dotx', 'dwg', 'dxf', 'eps', 'exe', 'flv', 'gif', 'h',
-	'hpp', 'html', 'ics', 'iso', 'java', 'jpg', 'js', 'key', 'less', 'mid', 'mp3', 'mp4', 'mpg', 'odf', 'ods', 'odt', 'otp', 'ots',
+	'hpp', 'html', 'ics', 'iso', 'java', 'jpeg', 'jpg', 'js', 'key', 'less', 'mid', 'mp3', 'mp4', 'mpg', 'odf', 'ods', 'odt', 'otp', 'ots',
 	'ott', 'pdf', 'php', 'png', 'ppt', 'psd', 'py', 'qt', 'rar', 'rb', 'rtf', 'sass', 'scss', 'sql', 'tga', 'tgz', 'tiff', 'txt',
 	'wav', 'xls', 'xlsx', 'xml', 'yml', 'zip'
 ];
@@ -29,13 +29,13 @@ var Item = React.createClass({
 		}
 
 		if (this.props.deleted) {
-			body.push(<span className='file-note-delete'>save to delete</span>);
+			body.push(<span className='file-note-delete'>保存后删除</span>);
 		} else if (this.props.isQueued) {
-			body.push(<span className='file-note-upload'>save to upload</span>);
+			body.push(<span className='file-note-upload'>保存后上传</span>);
 		}
 
 		if (!this.props.isQueued) {
-			var actionLabel = this.props.deleted ? 'undo' : 'remove';
+			var actionLabel = this.props.deleted ? '撤销' : '删除';
 			body.push(<span className='file-action' onClick={this.props.toggleDelete}>{actionLabel}</span>);
 		}
 
@@ -119,13 +119,13 @@ module.exports = Field.create({
 	renderToolbar: function () {
 		var clearFilesButton;
 		if (this.hasFiles()) {
-			clearFilesButton = <button type='button' className='btn btn-default btn-upload' onClick={this.clearFiles}>Clear uploads</button>;
+			clearFilesButton = <button type='button' className='btn btn-default btn-upload' onClick={this.clearFiles}>清除上传</button>;
 		}
 
 		return (
 			<div className='files-toolbar row col-sm-3 col-md-12'>
 				<div className='pull-left'>
-					<button type='button' className='btn btn-default btn-upload' onClick={this.changeFiles}>Upload</button>
+					<button type='button' className='btn btn-default btn-upload' onClick={this.changeFiles}>上传</button>
 					{clearFilesButton}
 				</div>
 			</div>
@@ -143,7 +143,7 @@ module.exports = Field.create({
 				</div>
 
 				<div className='file-details'>
-					<span className='file-message'>Click to upload</span>
+					<span className='file-message'>点击上传</span>
 				</div>
 			</div>
 		);

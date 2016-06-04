@@ -29,5 +29,5 @@ module.exports = {
 	textarea:         require('../../fields/types/textarea/TextareaField'),
 	textarray:        require('../../fields/types/textarray/TextArrayField'),
 	url:              require('../../fields/types/url/UrlField'),
-	ossfiles:         require('../../fields/types/oosfiles/OssFilesField')
+	ossfiles:         require('../../fields/types/ossfiles/OssFilesField')
 };

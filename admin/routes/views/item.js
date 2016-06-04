@@ -77,7 +77,7 @@ exports = module.exports = function(req, res) {
 
 			if (!keystone.security.csrf.validate(req)) {
 				console.error('CSRF failure', req.method, req.body);
-				req.flash('error', 'There was a problem with your request, please try again.');
+				req.flash('error', '保存失败');
 				return renderView();
 			}
 
@@ -85,7 +85,7 @@ exports = module.exports = function(req, res) {
 				if (err) {
 					return renderView();
 				}
-				req.flash('success', 'Your changes have been saved.');
+				req.flash('success', '更改已保存.');
 				return res.redirect('/keystone/' + req.list.path + '/' + item.id);
 			});
 

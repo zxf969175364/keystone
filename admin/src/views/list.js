@@ -34,7 +34,7 @@ var View = React.createClass({
 			<div className="toolbar">
 				<button type="button" className="btn btn-default btn-create btn-create-item" onClick={this.toggleCreate.bind(this, true)}>
 					<span className="ion-plus-round mr-5" />
-					Create {Keystone.list.singular}
+					创建 {Keystone.list.singular}
 				</button>
 			</div>
 		);

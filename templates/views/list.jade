@@ -45,24 +45,24 @@ block content
 			if items.total
 				span.items-total= utils.plural(items.total, '* ' + list.singular, '* ' + list.plural) + ' '
 			else
-				span.items-total No #{list.plural.toLowerCase()} found
+				span.items-total 没有 #{list.plural.toLowerCase()}
 					= search || xFilters ? ' ' : '.'
 
 			.search-sort(style='display:inline-block')
 				if search
-					span.text-muted  matching 
+					span.text-muted  匹配 
 					span=search
 					if xFilters
-						span.text-muted  and
+						span.text-muted  及
 						span= utils.plural(xFilters, ' * other filter')
 				else if xFilters
-					span.text-muted  matching 
+					span.text-muted  匹配 
 					span= utils.plural(xFilters, ' * filter')
 			
 				//- Sort
 				if items.results.length
 					if sort.by
-						span.text-muted &nbsp;ordered by&nbsp;
+						span.text-muted &nbsp;排序字段&nbsp;
 					else
 						span.text-muted &mdash;
 					span.dropdown.list-sort-dropdown
@@ -70,7 +70,7 @@ block content
 							if sort.label
 								= sort.label.toLowerCase() + ' '
 								if sort.inv
-									|  (descending)
+									|  (降序)
 							else
 								| sort by
 							b.caret
@@ -79,15 +79,15 @@ block content
 								if sort.by == 'sortOrder'
 									li: a(href=link_to({sort: '-sortOrder'}))
 										span(class='fieldicon fieldicon-sort')
-										span Display Order (inverted)
+										span 显示顺序 (倒序)
 								else if sort.by == '-sortOrder'
 									li: a(href=link_to({sort: 'sortOrder'}))
 										span(class='fieldicon fieldicon-sort')
-										span Display Order (normal)
+										span 显示顺序 (正序)
 								else
 									li: a(href=link_to({sort: 'sortOrder'}))
 										span(class='fieldicon fieldicon-sort')
-										span Display Order
+										span 显示顺序
 							each el in list.uiElements
 								if el.type == 'heading'
 									li.dropdown-header= el.heading
@@ -97,11 +97,11 @@ block content
 											if sort.inv
 												li: a(href=link_to({ sort: el.field.path }))
 													span(class='fieldicon fieldicon-' + el.field.type)
-													span= el.field.label + ' (ascending)'
+													span= el.field.label + ' (升序)'
 											else
 												li: a(href=link_to({ sort: '-' + el.field.path }))
 													span(class='fieldicon fieldicon-' + el.field.type)
-													span= el.field.label + ' (descending)'
+													span= el.field.label + ' (降序)'
 										else
 											li: a(href=link_to({ sort: el.field.path }))
 												span(class='fieldicon fieldicon-' + el.field.type)
@@ -113,29 +113,29 @@ block content
 											if sort.inv
 												li: a(href=link_to({ sort: list.tracking.createdAt }))
 													span(class='fieldicon fieldicon-date')
-													span Date Created (ascending)
+													span 创建时间 (升序)
 											else
 												li: a(href=link_to({ sort: '-' + list.tracking.createdAt }))
 													span(class='fieldicon fieldicon-date')
-													span Date Created (descending)
+													span 创建时间 (降序)
 										else
 											li: a(href=link_to({ sort: list.tracking.createdAt }))
 												span(class='fieldicon fieldicon-date')
-												span Date Created
+												span 创建时间
 									if list.tracking.updatedAt
 										if sort.path == 'updatedAt'
 											if sort.inv
 												li: a(href=link_to({ sort: list.tracking.updatedAt }))
 													span(class='fieldicon fieldicon-date')
-													span Date Modified (ascending)
+													span 修改时间 (升序)
 											else
 												li: a(href=link_to({ sort: '-' + list.tracking.updatedAt }))
 													span(class='fieldicon fieldicon-date')
-													span Date Modified (descending)
+													span 修改时间 (降序)
 										else
 											li: a(href=link_to({ sort: list.tracking.updatedAt }))
 												span(class='fieldicon fieldicon-date')
-												span Date Modified
+												span 修改时间
 		
 		
 		//-
@@ -152,20 +152,20 @@ block content
 						.form-inline
 							.dropdown-inline.list-filter-dropdown.js-recent-searches.hidden.mr-5
 								button(type='button', data-toggle='dropdown', title='Recent Filters').btn.btn-default.dropdown-toggle
-									span.sr-only Recent Filters
+									span.sr-only 最近使用的过滤器
 									span.ion-clock
 									|  
 									span.caret
 								ul.dropdown-menu
-									li.dropdown-header Recent Filters
+									li.dropdown-header 最近使用的过滤器
 							.form-inline.searchbox-form.mr-5
 								.searchbox-field
-									input(type='search', name='search', placeholder='Search #{list.plural.toLowerCase()}', value=search).form-control.js-search-list.searchbox-input
+									input(type='search', name='search', placeholder='搜索 #{list.plural.toLowerCase()}', value=search).form-control.js-search-list.searchbox-input
 									if search
 										a(href='/keystone/#{list.path}', title='Clear search').search-list-clear &times;
 								.searchbox-button: button(type='submit').btn.btn-default.btn-search.searchbox-submit
-									span.visible-xs Go
-									span.hidden-xs Search
+									span.visible-xs 前往
+									span.hidden-xs 搜索
 							//- .search-field
 								input(type='text', name='search', placeholder='Search ' + list.plural.toLowerCase(), value=search).form-control
 							//- span.search-button: button(type='submit').btn.btn-default.btn-search
@@ -173,7 +173,7 @@ block content
 								span.hidden-xs Search
 							.dropdown-inline.list-filter-dropdown
 								button(type='button', data-toggle='dropdown').btn.btn-default.dropdown-toggle
-									| Add Filter 
+									| 添加过滤 
 									b.caret
 								ul.dropdown-menu: each el in list.uiElements
 									if el.type == 'heading'
@@ -188,10 +188,10 @@ block content
 					if items.total
 						.pull-right.hidden-xs
 							.pull-right
-								a(href=download_link, data-confirm="Download a .csv of #{utils.plural(items.total, '* ' + list.singular, '* ' + list.plural).toLowerCase()}?").btn.btn-default Download
+								a(href=download_link, data-confirm="Download a .csv of #{utils.plural(items.total, '* ' + list.singular, '* ' + list.plural).toLowerCase()}?").btn.btn-default 下载
 							div(style='margin-right: 10px;').dropdown.list-columns-dropdown.pull-right
 								button(type='button', data-toggle='dropdown').btn.btn-default.dropdown-toggle
-									| Columns 
+									| 显示列 
 									b.caret
 								ul.dropdown-menu
 									each el in list.uiElements
@@ -206,16 +206,16 @@ block content
 											if list.tracking.createdAt
 												li: a(href=js, data-col=list.tracking.createdAt).btn-toggle-column
 													span(class=_.contains(colPaths, list.tracking.createdAt) ? 'ion-checkmark' : '').icon
-													span Date Created
+													span 创建时间
 											if list.tracking.updatedAt
 												li: a(href=js, data-col=list.tracking.updatedAt).btn-toggle-column
 													span(class=_.contains(colPaths, list.tracking.updatedAt) ? 'ion-checkmark' : '').icon
-													span Date Modified
+													span 修改时间
 									if query.cols
 										li.divider
 										li: a(href=link_to({ cols: undefined }))
 											span.ion-close.icon
-											span Reset to default
+											span 恢复默认
 			
 			
 			//-
@@ -236,35 +236,35 @@ block content
 									.btn-group.btn-group-xs(data-toggle='buttons')
 										button(type='button', class=!ops.exact ? 'active' : '').btn.btn-default
 											input(type='radio', name='options')
-											| contains
+											| 包含
 										button(type='button', class=ops.exact ? 'active' : '', data-opt='exact', data-value='true').btn.btn-default
 											input(type='radio', name='options')
-											| exact match
+											| 等于
 									.filter-input.filter-input-md: input(type='text', name='value', value=ops.value).form-control.input-xs
-									button(type='button', data-toggle='button', class=ops.inverse ? 'active' : '', data-opt='inv', data-value='true').btn.btn-xs.btn-default invert
+									button(type='button', data-toggle='button', class=ops.inverse ? 'active' : '', data-opt='inv', data-value='true').btn.btn-xs.btn-default 非
 								
 								//- Numeric Fields
 								if field.type == 'number' || field.type == 'money'
 									.btn-group.btn-group-operator.btn-group-xs(data-toggle='buttons')
 										button(type='button', class=!ops.operator ? 'active' : '').btn.btn-default
 											input(type='radio', name='options')
-											| exactly
+											| 等于
 										button(type='button', class=ops.operator == 'gt' ? 'active' : '', data-opt='operator', data-value='gt').btn.btn-default
 											input(type='radio', name='options')
-											| greater than
+											| 大于
 										button(type='button', class=ops.operator == 'lt' ? 'active' : '', data-opt='operator', data-value='lt').btn.btn-default
 											input(type='radio', name='options')
-											| less than
+											| 小于
 										button(type='button', class=ops.operator == 'bt' ? 'active' : '', data-opt='operator', data-value='bt').btn.btn-default
 											input(type='radio', name='options')
-											| between
+											| 之间
 								
 									.filter-input
 										.filter-input-range.form-inline.text-sm(style='display:none')
 											input(type='number', value=(ops.operator === 'bt' && ops.value[0])).form-control.input-xs.field-inline--xs.filter-input-range1
-											span.mh-1 and
+											span.mh-1 且
 											input(type='number', value=(ops.operator === 'bt' && ops.value[1])).form-control.input-xs.field-inline--xs.filter-input-range2
-											span.mh-1 (inclusive)
+											span.mh-1 (包括)
 										.filter-input-standard(style='display:none')
 											input(type='number', name='value', value=(ops.operator !== 'bt' && ops.value)).form-control.input-xs
 							
@@ -273,23 +273,23 @@ block content
 									.btn-group.btn-group-operator.btn-group-xs(data-toggle='buttons')
 										button(type='button', class=(!ops.operator) ? 'active' : '').btn.btn-default
 											input(type='radio', name='options')
-											| on
+											| 等于
 										button(type='button', class=ops.operator == 'gt' ? 'active' : '', data-opt='operator', data-value='gt').btn.btn-default
 											input(type='radio', name='options')
-											| after
+											| 大于
 										button(type='button', class=ops.operator == 'lt' ? 'active' : '', data-opt='operator', data-value='lt').btn.btn-default
 											input(type='radio', name='options')
-											| before
+											| 小于
 										button(type='button', class=ops.operator == 'bt' ? 'active' : '', data-opt='operator', data-value='bt').btn.btn-default
 											input(type='radio', name='options')
-											| between
+											| 之间
 								
 									.filter-input
 										.filter-input-range.form-inline.text-sm(style='display:none')
 											input(type='text', value=(ops.operator === 'bt' && ops.value[0])).form-control.input-xs.field-inline--sm.ui-datepicker.filter-input-range1
-											span.mh-1 and
+											span.mh-1 且
 											input(type='text', value=(ops.operator === 'bt' && ops.value[1])).form-control.input-xs.field-inline--sm.ui-datepicker.filter-input-range2
-											span.mh-1 (inclusive)
+											span.mh-1 (包括)
 										.filter-input-standard(style='display:none')
 											input(type='text', name='value', value=(ops.operator !== 'bt' && ops.value)).form-control.input-xs.ui-datepicker
 								
@@ -307,10 +307,10 @@ block content
 									.btn-group.btn-group-xs(data-toggle='buttons')
 										button(type='button', class=!ops.inverse ? 'active' : '').btn.btn-default
 											input(type='radio', name='options')
-											| is
+											| 是
 										button(type='button', class=ops.inverse ? 'active' : '', data-opt='inv', data-value='true').btn.btn-default
 											input(type='radio', name='options')
-											| is not
+											| 不是
 									.filter-input.filter-input-md: select(name='value')
 										option(value='')
 										each op in field.ops
@@ -321,50 +321,50 @@ block content
 									.btn-group.btn-group-xs(data-toggle='buttons')
 										button(type='button', class=ops.value !== false && ops.value !== 'false' ? 'active' : '', data-opt='value', data-value='true').btn.btn-default
 											input(type="radio", name="options")
-											| checked
+											| 选择
 										button(type='button', class=ops.value === false || ops.value === 'false' ? 'active' : '', data-opt='value', data-value='false').btn.btn-default
 											input(type="radio", name="options")
-											| not checked
+											| 不选择
 								
 								//- Cloudinary Image
 								if field.type == 'cloudinaryimage'
 									.btn-group.btn-group-xs(data-toggle='buttons')
 										button(type='button', class=ops.value !== false ? 'active' : '', data-opt='value', data-value='true').btn.btn-default
 											input(type="radio", name="options")
-											| has image
+											| 已有图片
 										button(type='button', class=ops.value === false ? 'active' : '', data-opt='value', data-value='false').btn.btn-default
 											input(type="radio", name="options")
-											| has no image
+											| 没有图片
 								
 								//- S3 File
 								if field.type == 's3file'
 									.btn-group.btn-group-xs(data-toggle='buttons')
 										button(type='button', class=ops.value !== false ? 'active' : '', data-opt='value', data-value='true').btn.btn-default
 											input(type="radio", name="options")
-											| has file
+											| 已有文件
 										button(type='button', class=ops.value === false ? 'active' : '', data-opt='value', data-value='false').btn.btn-default
 											input(type="radio", name="options")
-											| has no file
+											| 没有文件
 
 								//- Local File
 								if field.type == 'localfile'
 									.btn-group.btn-group-xs(data-toggle='buttons')
 										button(type='button', class=ops.value !== false ? 'active' : '', data-opt='value', data-value='true').btn.btn-default
 											input(type="radio", name="options")
-											| has file
+											| 已有文件
 										button(type='button', class=ops.value === false ? 'active' : '', data-opt='value', data-value='false').btn.btn-default
 											input(type="radio", name="options")
-											| has no file
+											| 没有文件
 								
 								//- Relationships
 								if field.type == 'relationship'
 									.btn-group.btn-group-xs(data-toggle='buttons')
 										button(type='button', class=ops.inverse ? '' : 'active', data-opt='inv', data-value='false').btn.btn-default
 											input(type="radio", name="options")
-											| linked to
+											| 关联
 										button(type='button', class=ops.inverse ? 'active' : '', data-opt='inv', data-value='true').btn.btn-default
 											input(type="radio", name="options")
-											| not linked to
+											| 不关联
 									input(type='hidden',
 										name=field.path,
 										id='field_' + field.path,
@@ -374,8 +374,8 @@ block content
 										data-ref-plural=field.refList.plural).ui-select2-ref
 								
 				.list-filters-action
-					button(type='submit').btn.btn-default.btn-filter Search
-					a(href='/keystone/#{list.path}').btn.btn-link.btn-cancel clear filters
+					button(type='submit').btn.btn-default.btn-filter 搜索
+					a(href='/keystone/#{list.path}').btn.btn-link.btn-cancel 删除过滤
 			
 	if items.results.length
 		//-
@@ -386,7 +386,7 @@ block content
 			if items.totalPages > 1
 				+pagination(items)
 			else
-				.count Showing #{utils.plural(items.total, '* ' + list.singular, '* ' + list.plural)}
+				.count 显示 #{utils.plural(items.total, '* ' + list.singular, '* ' + list.plural)}
 		
 		
 		- var sortable = list.get('sortable') && !list.get('sortContext') && sort.by == 'sortOrder'
@@ -406,15 +406,15 @@ block content
 						th(colspan=i == 0 && firstColspan > 1 ? firstColspan : false)
 							if col.field && sort.field && sort.field.path == col.field.path
 								if sort.inv
-									a(href=link_to({ sort: col.field.path }), title='Sort by ' + col.label + ' (asc)', class='th-sort--desc').th-sort
+									a(href=link_to({ sort: col.field.path }), title='按 ' + col.label + ' 升序', class='th-sort--desc').th-sort
 										= col.label
 										span.th-sort__icon
 								else
-									a(href=link_to({ sort: '-' + col.field.path }), title='Sort by ' + col.label + ' (desc)', class='th-sort--asc').th-sort
+									a(href=link_to({ sort: '-' + col.field.path }), title='按 ' + col.label + ' 倒序', class='th-sort--asc').th-sort
 										= col.label
 										span.th-sort__icon
 							else if col.field
-								a(href=link_to({ sort: col.field.path }), title='Sort by ' + col.label).th-sort= col.label
+								a(href=link_to({ sort: col.field.path }), title='按 ' + col.label + ' 排序').th-sort= col.label
 									span.th-sort__icon
 							else
 								= col.label

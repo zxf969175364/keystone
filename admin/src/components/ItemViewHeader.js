@@ -118,14 +118,14 @@ var Header = React.createClass({
 							onChange={this.searchStringChanged}
 							onFocus={this.searchFocusChanged.bind(this, true)}
 							onBlur={this.searchFocusChanged.bind(this, false)}
-							placeholder={'Search ' + list.plural}
+							placeholder={'搜索 ' + list.plural}
 							className="form-control searchbox-input"
 						/>
 					</div>
 					<div className="searchbox-button">
-						<button type="submit" className={submitButtonClass}>Search</button>
+						<button type="submit" className={submitButtonClass}>搜索</button>
 					</div>
-					<button type="button" className="btn btn-link btn-cancel" onClick={this.toggleSearch.bind(this, false)}>Cancel</button>
+					<button type="button" className="btn btn-link btn-cancel" onClick={this.toggleSearch.bind(this, false)}>取消</button>
 				</form>
 			</div>
 		);
@@ -162,7 +162,7 @@ var Header = React.createClass({
 			<li>
 				<a className="item-toolbar-create-button" href="javascript:;" onClick={this.toggleCreate.bind(this, true)}>
 					<span className="mr-5 ion-plus"></span>
-					New {this.props.list.singular}
+					创建 {this.props.list.singular}
 				</a>
 			</li>
 		);

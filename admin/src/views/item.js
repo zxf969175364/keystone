@@ -27,8 +27,8 @@ var View = React.createClass({
 			.end((err, res) => {
 				if (err || !res.ok) {
 					// TODO: nicer error handling
-					console.log('Error loading item data:', res ? res.text : err);
-					alert('Error loading data (details logged to console)');
+					console.log('错误加载数据:', res ? res.text : err);
+					alert('错误加载数据(详细信息记录到控制台)');
 					return;
 				}
 				this.setState({

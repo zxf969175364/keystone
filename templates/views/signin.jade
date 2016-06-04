@@ -1,31 +1,31 @@
 extends ../layout/auth
 
 block content
-	h1.sr-only Sign In
+	h1.sr-only 登陆
 	.auth-box
 		.auth-box-col
 			include ../includes/auth-brand
 			
 		.auth-box-col
 			if user
-				p.lead Hi #{user.name.first},
-				p.lead You're already signed in.
+				p.lead 你好 #{user.name.first},
+				p.lead 你已经登陆.
 				.toolbar
 					if user.isAdmin
-						a(href='/keystone').btn.btn-primary Open Keystone
-					a(href='/keystone/signout').btn.btn-cancel Sign out
+						a(href='/keystone').btn.btn-primary 打开 Keystone
+					a(href='/keystone/signout').btn.btn-cancel 登出
 			
 			else
 				form(method="post", novalidate).auth-form
 					input(type='hidden', name=csrf_token_key, value=csrf_token_value)
 					.form-group
-						label(for='email') Email
+						label(for='email') 邮箱
 						input(type='email', name='email', id='email', value=submitted.email).form-control
 					.form-group
-						label(for='password') Password
+						label(for='password') 密码
 						input(type='password', name='password', id='password').form-control
 					
-					button(type='submit').btn.btn-primary Sign In
+					button(type='submit').btn.btn-primary 登陆
 				
 				//- TODO generic forgotten password functionality
 				//- button(type='button').btn.btn-link Forgot Password?

@@ -1,5 +1,5 @@
 mixin pagination(items)
-  .count Showing #{items.first} to #{items.last} of #{items.total}
+  .count 当前显示 #{items.first} 至 #{items.last} 共 #{items.total}
   ul.pagination: each p, i in items.pages
     li(class=items.currentPage == p ? 'active' : null)
       a(href=(p == '...' ? link_to({page: (i ? items.totalPages : 1)}) : link_to({page: p})))= p
