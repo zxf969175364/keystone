@@ -187,6 +187,7 @@ s3file.prototype.updateItem = function (item, data, callback) { // eslint-disabl
 	process.nextTick(callback);
 };
 
+
 /**
  * Validates a header option value provided for this item, throwing an error otherwise
  * @param header {Object} the header object to validate

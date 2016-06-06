@@ -7,7 +7,7 @@ import React from 'react';
 const InvalidFieldType = function (props) {
 	return (
 		<div className="alert alert-danger">
-			Invalid field type <strong>{props.type}</strong> at path <strong>{props.path}</strong>
+			不合法的 <strong>{props.type}</strong> 在 <strong>{props.path}</strong>
 		</div>
 	);
 };

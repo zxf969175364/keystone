@@ -257,7 +257,7 @@ describe('Keystone.session', function () {
 					err.must.be.an.instanceof(Error)
 					// make sure .signinWithUser() is NOT called on failed match
 					sinon.assert.notCalled(keystone.session.signinWithUser);
-					done();
+					done()
 				}.bind(this));
 			});
 

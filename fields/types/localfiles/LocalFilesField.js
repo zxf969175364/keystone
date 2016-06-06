@@ -9,7 +9,7 @@ const ICON_EXTS = [
 	'aac', 'ai', 'aiff', 'avi', 'bmp', 'c', 'cpp', 'css', 'dat', 'dmg', 'doc', 'dotx', 'dwg', 'dxf', 'eps', 'exe', 'flv', 'gif', 'h',
 	'hpp', 'html', 'ics', 'iso', 'java', 'jpg', 'js', 'key', 'less', 'mid', 'mp3', 'mp4', 'mpg', 'odf', 'ods', 'odt', 'otp', 'ots',
 	'ott', 'pdf', 'php', 'png', 'ppt', 'psd', 'py', 'qt', 'rar', 'rb', 'rtf', 'sass', 'scss', 'sql', 'tga', 'tgz', 'tiff', 'txt',
-	'wav', 'xls', 'xlsx', 'xml', 'yml', 'zip',
+	'wav', 'xls', 'xlsx', 'xml', 'yml', 'zip', 'jpg', 'jpeg'
 ];
 
 var LocalFilesFieldItem = React.createClass({
@@ -39,9 +39,9 @@ var LocalFilesFieldItem = React.createClass({
 
 		let note;
 		if (this.props.deleted) {
-			note = <FormInput key="delete-note" noedit className="field-type-localfiles__note field-type-localfiles__note--delete">save to delete</FormInput>;
+			note = <FormInput key="delete-note" noedit className="field-type-localfiles__note field-type-localfiles__note--delete">保存后删除</FormInput>;
 		} else if (this.props.isQueued) {
-			note = <FormInput key="upload-note" noedit className="field-type-localfiles__note field-type-localfiles__note--upload">save to upload</FormInput>;
+			note = <FormInput key="upload-note" noedit className="field-type-localfiles__note field-type-localfiles__note--upload">保存后上传</FormInput>;
 		}
 
 		return (
@@ -137,12 +137,12 @@ module.exports = Field.create({
 
 		var clearFilesButton;
 		if (this.hasFiles()) {
-			clearFilesButton = <Button type="link-cancel" className="ml-5" onClick={this.clearFiles}>Clear Uploads</Button>;
+			clearFilesButton = <Button type="link-cancel" className="ml-5" onClick={this.clearFiles}>清除上传</Button>;
 		}
 
 		return (
 			<div className="files-toolbar">
-				<Button onClick={this.changeFiles}>Upload</Button>
+				<Button onClick={this.changeFiles}>上传</Button>
 				{clearFilesButton}
 			</div>
 		);
@@ -159,7 +159,7 @@ module.exports = Field.create({
 				</div>
 
 				<div className="file-details">
-					<span className="file-message">Click to upload</span>
+					<span className="file-message">点击上传</span>
 				</div>
 			</div>
 		);

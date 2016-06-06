@@ -44,7 +44,7 @@ var SigninView = React.createClass({
 		e.preventDefault();
 		// If either password or mail are missing, show an error
 		if (!this.state.email || !this.state.password) {
-			return this.displayError('Please enter an email address and password to sign in.');
+			return this.displayError('请输入邮箱地址和密码.');
 		}
 
 		xhr({
@@ -57,7 +57,7 @@ var SigninView = React.createClass({
 			headers: csrfHeaders,
 		}, (err, resp, body) => {
 			if (err || body && body.error) {
-				return this.displayError('The email and password you entered are not valid.');
+				return this.displayError('账号或密码错误.');
 			} else {
 				// Redirect to where we came from or to the default admin path
 				if (Keystone.redirect) {
@@ -104,7 +104,7 @@ var SigninView = React.createClass({
 					invalidMessage={this.state.invalidMessage}
 				/>
 				<div className={boxClassname}>
-					<h1 className="u-hidden-visually">{this.props.brand ? this.props.brand : 'Keystone'} Sign In </h1>
+					<h1 className="u-hidden-visually">{this.props.brand ? this.props.brand : 'Keystone'} 登陆 </h1>
 					<div className="auth-box__inner">
 						<Brand
 							logo={this.props.logo}

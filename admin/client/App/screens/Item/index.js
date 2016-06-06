@@ -77,7 +77,7 @@ var ItemView = React.createClass({
 		return (
 			<div className="Relationships">
 				<Container>
-					<h2>Relationships</h2>
+					<h2>关系列表</h2>
 					{keys.map(key => {
 						const relationship = relationships[key];
 						const refList = listsByKey[relationship.ref];
@@ -111,7 +111,7 @@ var ItemView = React.createClass({
 					<FlashMessages
 						messages={{
 							error: [{
-								title: "There's a problem with the network, we're trying to reconnect...",
+								title: "网络错误,请重试...",
 							}],
 						}}
 					/>

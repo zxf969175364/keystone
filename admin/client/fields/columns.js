@@ -33,6 +33,7 @@ var Columns = {
 	textarea: require('../../../fields/types/textarea/TextareaColumn'),
 	textarray: require('../../../fields/types/textarray/TextArrayColumn'),
 	url: require('../../../fields/types/url/UrlColumn'),
+	ossimage: require('../../../fields/types/ossimage/OssImageColumn'),
 };
 
 Columns.id = require('../../../fields/components/columns/IdColumn');

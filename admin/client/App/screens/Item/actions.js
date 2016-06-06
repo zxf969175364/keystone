@@ -63,7 +63,7 @@ export function dataLoadingError () {
 	return (dispatch) => {
 		dispatch({
 			type: DATA_LOADING_ERROR,
-			error: 'Loading error',
+			error: '加载错误',
 		});
 		setTimeout(() => {
 			dispatch(loadItemData());
@@ -89,7 +89,7 @@ export function deleteItem (id, router) {
 			}
 			// TODO Proper error handling
 			if (err) {
-				alert('Error deleting item, please try again!');
+				alert('删除失败,请重试!');
 				console.log(err);
 			} else {
 				dispatch({

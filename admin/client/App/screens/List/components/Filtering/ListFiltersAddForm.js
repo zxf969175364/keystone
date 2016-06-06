@@ -60,9 +60,9 @@ var ListFiltersAddForm = React.createClass({
 				<Popout.Footer
 					ref="footer"
 					primaryButtonIsSubmit
-					primaryButtonLabel="Apply"
+					primaryButtonLabel="接受"
 					secondaryButtonAction={this.props.onCancel}
-					secondaryButtonLabel="Cancel" />
+					secondaryButtonLabel="取消" />
 			</form>
 		);
 	},

@@ -29,7 +29,7 @@ const RelatedItemsList = React.createClass({
 		if (!refList.fields[relationship.refPath]) {
 			const err = (
 				<Alert type="danger">
-					<strong>Error:</strong> Related List <strong>{refList.label}</strong> has no field <strong>{relationship.refPath}</strong>
+					<strong>错误信息:</strong> 关联列表 <strong>{refList.label}</strong> 没有字段 <strong>{relationship.refPath}</strong>
 				</Alert>
 			);
 			return this.setState({ err });
@@ -57,7 +57,7 @@ const RelatedItemsList = React.createClass({
 				</table>
 			</div>
 		) : (
-			<h4 className="Relationship__noresults">No related {this.props.refList.plural}</h4>
+			<h4 className="Relationship__noresults">没有关联数据 {this.props.refList.plural}</h4>
 		);
 	},
 	renderTableCols () {

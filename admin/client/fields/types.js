@@ -33,4 +33,6 @@ module.exports = {
 	textarea: require('../../../fields/types/textarea/TextareaField'),
 	textarray: require('../../../fields/types/textarray/TextArrayField'),
 	url: require('../../../fields/types/url/UrlField'),
+	ossimage: require('../../../fields/types/ossimage/OssImageField'),
+	ossfiles: require('../../../fields/types/ossfiles/OssFilesField'),
 };

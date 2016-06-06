@@ -117,7 +117,7 @@ const ListView = React.createClass({
 		list.createItem(null, (err, data) => {
 			if (err) {
 				// TODO Proper error handling
-				alert('Something went wrong, please try again!');
+				alert('错误,请重试!');
 				console.log(err);
 			} else {
 				this.context.router.push(`${Keystone.adminPath}/${list.path}/${data.id}`);
@@ -173,8 +173,8 @@ const ListView = React.createClass({
 		this.setState({
 			confirmationDialog: {
 				isOpen: true,
-				label: 'Delete',
-				body: `Are you sure you want to delete ${itemCount}?<br /><br />This cannot be undone.`,
+				label: '删除',
+				body: `是否删除 ${itemCount}?<br /><br />操作不可撤销.`,
 				onConfirmation: () => {
 					this.props.dispatch(deleteItems(itemIds));
 					this.toggleManageMode();
@@ -196,7 +196,7 @@ const ListView = React.createClass({
 		});
 		return (
 			<InputGroup.Section grow className="ListHeader__search">
-				<FormInput ref="listSearchInput" value={this.state.searchString} onChange={this.updateSearch} onKeyUp={this.handleSearchKey} placeholder="Search" className="ListHeader__searchbar-input" />
+				<FormInput ref="listSearchInput" value={this.state.searchString} onChange={this.updateSearch} onKeyUp={this.handleSearchKey} placeholder="搜索" className="ListHeader__searchbar-input" />
 				<button ref="listSearchClear" type="button" title="Clear search query" onClick={this.handleSearchClear} disabled={!this.state.searchString.length} className={searchClearIcon} />
 			</InputGroup.Section>
 		);
@@ -211,13 +211,13 @@ const ListView = React.createClass({
 		}
 		return (
 			<InputGroup.Section className="ListHeader__create">
-				<Button {...props} title={'Create ' + this.props.currentList.singular}>
+				<Button {...props} title={'创建 ' + this.props.currentList.singular}>
 					<span className="ListHeader__create__icon octicon octicon-plus" />
 					<span className="ListHeader__create__label">
-						Create
+						创建
 					</span>
 					<span className="ListHeader__create__label--lg">
-						Create {this.props.currentList.singular}
+						创建 {this.props.currentList.singular}
 					</span>
 				</Button>
 			</InputGroup.Section>
@@ -253,12 +253,12 @@ const ListView = React.createClass({
 		// action buttons
 		const actionUpdateButton = !list.noedit ? (
 			<InputGroup.Section>
-				<Button onClick={this.toggleUpdateModal} disabled={!checkedItemCount}>Update</Button>
+				<Button onClick={this.toggleUpdateModal} disabled={!checkedItemCount}>更新</Button>
 			</InputGroup.Section>
 		) : null;
 		const actionDeleteButton = !list.nodelete ? (
 			<InputGroup.Section>
-				<Button onClick={this.massDelete} disabled={!checkedItemCount}>Delete</Button>
+				<Button onClick={this.massDelete} disabled={!checkedItemCount}>删除</Button>
 			</InputGroup.Section>
 		) : null;
 		const actionButtons = manageMode ? (
@@ -273,7 +273,7 @@ const ListView = React.createClass({
 		// select buttons
 		const selectAllButton = items.count > pageSize ? (
 			<InputGroup.Section>
-				<Button onClick={() => this.handleManagementSelect('all')} title="Select all rows (including those not visible)">All <small style={buttonNoteStyles}>({items.count})</small></Button>
+				<Button onClick={() => this.handleManagementSelect('all')} title="选择全部行 (包括不可见行)">全部 <small style={buttonNoteStyles}>({items.count})</small></Button>
 			</InputGroup.Section>
 		) : null;
 		const selectButtons = manageMode ? (
@@ -281,10 +281,10 @@ const ListView = React.createClass({
 				<InputGroup style={groupStyles} contiguous>
 					{selectAllButton}
 					<InputGroup.Section>
-						<Button onClick={() => this.handleManagementSelect('visible')} title="Select all rows">{items.count > pageSize ? 'Page' : 'All'} <small style={buttonNoteStyles}>({items.results.length})</small></Button>
+						<Button onClick={() => this.handleManagementSelect('visible')} title="选择全部行">{items.count > pageSize ? '页数' : '全部'} <small style={buttonNoteStyles}>({items.results.length})</small></Button>
 					</InputGroup.Section>
 					<InputGroup.Section>
-						<Button onClick={() => this.handleManagementSelect('none')} title="Deselect all rows">None</Button>
+						<Button onClick={() => this.handleManagementSelect('none')} title="删除全部行">无</Button>
 					</InputGroup.Section>
 				</InputGroup>
 			</InputGroup.Section>
@@ -293,7 +293,7 @@ const ListView = React.createClass({
 		// selected count text
 		const selectedCountText = manageMode ? (
 			<InputGroup.Section grow>
-				<span style={{ color: '#666', display: 'inline-block', lineHeight: '2.4em', margin: 1 }}>{checkedItemCount} selected</span>
+				<span style={{ color: '#666', display: 'inline-block', lineHeight: '2.4em', margin: 1 }}>{checkedItemCount} 已选</span>
 			</InputGroup.Section>
 		) : null;
 
@@ -301,7 +301,7 @@ const ListView = React.createClass({
 		return (
 			<InputGroup style={{ float: 'left', marginRight: '.75em', marginBottom: 0 }}>
 				<InputGroup.Section>
-					<Button isActive={manageMode} onClick={() => this.toggleManageMode(!manageMode)}>Manage</Button>
+					<Button isActive={manageMode} onClick={() => this.toggleManageMode(!manageMode)}>管理</Button>
 				</InputGroup.Section>
 				{selectButtons}
 				{actionButtons}
@@ -371,7 +371,7 @@ const ListView = React.createClass({
 							<Button
 								isActive={!this.state.constrainTableWidth}
 								onClick={this.toggleTableWidth}
-								title="Expand table width"
+								title="增加表宽度"
 							>
 								<span className="octicon octicon-mirror" />
 							</Button>
@@ -434,8 +434,8 @@ const ListView = React.createClass({
 		this.setState({
 			confirmationDialog: {
 				isOpen: true,
-				label: 'Delete',
-				body: `Are you sure you want to delete <strong>${item.name}</strong>?<br /><br />This cannot be undone.`,
+				label: '删除',
+				body: `是否删除 <strong>${item.name}</strong>?<br /><br />操作不可撤销.`,
 				onConfirmation: () => {
 					this.props.dispatch(deleteItem(item.id));
 					this.removeConfirmationDialog();
@@ -480,7 +480,7 @@ const ListView = React.createClass({
 		}
 		return (
 			<Button {...props}>
-				<span className="octicon octicon-plus" /> Create {list.singular}
+				<span className="octicon octicon-plus" /> 创建 {list.singular}
 			</Button>
 		);
 	},
@@ -497,12 +497,12 @@ const ListView = React.createClass({
 				{(this.props.error) ? (
 					<FlashMessages
 						messages={{ error: [{
-							title: "There is a problem with the network, we're trying to reconnect...",
+							title: "网络错误,请重试...",
 						}] }}
 					/>
 				) : null}
 				<BlankState style={{ marginTop: 40 }}>
-					<BlankState.Heading>No {this.props.currentList.plural.toLowerCase()} found&hellip;</BlankState.Heading>
+					<BlankState.Heading>{this.props.currentList.plural.toLowerCase()} 未找到&hellip;</BlankState.Heading>
 					{this.renderBlankStateCreateButton()}
 				</BlankState>
 			</Container>
@@ -527,7 +527,7 @@ const ListView = React.createClass({
 					{(this.props.error) ? (
 						<FlashMessages
 							messages={{ error: [{
-								title: "There is a problem with the network, we're trying to reconnect..",
+								title: "网络错误,请重试..",
 							}] }}
 						/>
 					) : null}
@@ -566,11 +566,11 @@ const ListView = React.createClass({
 		if (this.props.active.filters.length) {
 			matching += (matching ? ' and ' : '') + plural(this.props.active.filters.length, '* filter', '* filters');
 		}
-		matching = matching ? ' found matching ' + matching : '.';
+		matching = matching ? ' 正在匹配 ' + matching : '.';
 		return (
 			<BlankState style={{ marginTop: 20, marginBottom: 20 }}>
 				<span className="octicon octicon-search" style={{ fontSize: 32, marginBottom: 20 }} />
-				<BlankState.Heading>No {this.props.currentList.plural.toLowerCase()}{matching}</BlankState.Heading>
+				<BlankState.Heading>{this.props.currentList.plural.toLowerCase()}{matching}</BlankState.Heading>
 			</BlankState>
 		);
 	},

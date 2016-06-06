@@ -10,7 +10,7 @@ const AlertView = function (props) {
 	if (props.isInvalid) {
 		return <Alert key="error" type="danger" style={{ textAlign: 'center' }}>{props.invalidMessage}</Alert>;
 	} else if (props.signedOut) {
-		return <Alert key="signed-out" type="info" style={{ textAlign: 'center' }}>You have been signed out.</Alert>;
+		return <Alert key="signed-out" type="info" style={{ textAlign: 'center' }}>你已经退出登录.</Alert>;
 	} else {
 		// Can't return "null" from stateless components
 		return <span />;

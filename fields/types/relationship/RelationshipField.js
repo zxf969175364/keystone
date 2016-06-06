@@ -26,7 +26,6 @@ module.exports = Field.create({
 			createIsOpen: false,
 		};
 	},
-
 	componentDidMount () {
 		this._itemsCache = {};
 		this.loadValue(this.props.value);
@@ -50,6 +49,7 @@ module.exports = Field.create({
 
 		_.forEach(this.props.filters, (value, key) => {
 			if (_.isString(value) && value[0] == ':') { // eslint-disable-line eqeqeq
+
 				var fieldName = value.slice(1);
 
 				var val = this.props.values[fieldName];
@@ -81,7 +81,6 @@ module.exports = Field.create({
 		item.href = Keystone.adminPath + '/' + this.props.refList.path + '/' + item.id;
 		this._itemsCache[item.id] = item;
 	},
-
 	loadValue (values) {
 		if (!values) {
 			return this.setState({
@@ -224,5 +223,4 @@ module.exports = Field.create({
 			return this.renderSelect();
 		}
 	},
-
 });

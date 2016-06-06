@@ -15,14 +15,14 @@ const UserInfo = function (props) {
 					href={Keystone.adminPath}
 					type="primary"
 				>
-					Open Keystone
+					打开 Keystone
 				</Button>
 			) : null}
 			<Button
 				href={`${Keystone.adminPath}/signout`}
 				type="link-cancel"
 			>
-				Sign Out
+				登出
 			</Button>
 		</div>
 	);

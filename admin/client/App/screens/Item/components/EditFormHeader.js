@@ -119,7 +119,7 @@ var Header = React.createClass({
 		return (
 			<Button type="success" {...props}>
 				<span className="octicon octicon-plus" />
-				<ResponsiveText hiddenXS={`New ${this.props.list.singular}`} visibleXS="Create" />
+				<ResponsiveText hiddenXS={`新 ${this.props.list.singular}`} visibleXS="创建" />
 			</Button>
 		);
 	},

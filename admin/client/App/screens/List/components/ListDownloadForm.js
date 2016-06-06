@@ -103,27 +103,27 @@ var ListDownloadForm = React.createClass({
 			<InputGroup.Section className={this.props.className}>
 				<Button id="listHeaderDownloadButton" isActive={this.state.isOpen} onClick={() => this.togglePopout(!this.state.isOpen)}>
 					<span className={this.props.className + '__icon octicon octicon-cloud-download'} />
-					<span className={this.props.className + '__label'}>Download</span>
+					<span className={this.props.className + '__label'}>下载</span>
 					<span className="disclosure-arrow" />
 				</Button>
 				<Popout isOpen={this.state.isOpen} onCancel={() => this.togglePopout(false)} relativeToID="listHeaderDownloadButton">
-					<Popout.Header title="Download" />
+					<Popout.Header title="下载" />
 					<Popout.Body scrollable>
 						<Form type="horizontal" component="div">
-							<FormField label="File format:">
+							<FormField label="文件格式:">
 								<SegmentedControl equalWidthSegments options={FORMAT_OPTIONS} value={this.state.format} onChange={this.changeFormat} />
 							</FormField>
-							<FormField label="Columns:">
-								<Checkbox autofocus label="Use currently selected" onChange={this.toggleCurrentlySelectedColumns} value checked={useCurrentColumns} />
+							<FormField label="列:">
+								<Checkbox autofocus label="使用当前选择" onChange={this.toggleCurrentlySelectedColumns} value checked={useCurrentColumns} />
 							</FormField>
 							{this.renderColumnSelect()}
 						</Form>
 					</Popout.Body>
 					<Popout.Footer
 						primaryButtonAction={this.handleDownloadRequest}
-						primaryButtonLabel="Download"
+						primaryButtonLabel="下载"
 						secondaryButtonAction={() => this.togglePopout(false)}
-						secondaryButtonLabel="Cancel" />
+						secondaryButtonLabel="取消" />
 				</Popout>
 			</InputGroup.Section>
 		);

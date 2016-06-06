@@ -143,7 +143,7 @@ var HomeView = React.createClass({
 					{(this.props.error) ? (
 						<AlertMessages
 							alerts={{ error: { error:
-								"There is a problem with the network, we're trying to reconnect...",
+								"网络错误,请重新连接...",
 							} }}
 						/>
 					) : null}

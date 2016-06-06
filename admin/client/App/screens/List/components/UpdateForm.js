@@ -86,7 +86,7 @@ var UpdateForm = React.createClass({
 
 		const fieldsUI = formFields.length ? formFields : (
 			<BlankState style={{ padding: '3em 2em' }}>
-				<BlankState.Heading style={{ fontSize: '1.5em' }}>Choose a field above to begin</BlankState.Heading>
+				<BlankState.Heading style={{ fontSize: '1.5em' }}>从上面选择一个字段开始</BlankState.Heading>
 			</BlankState>
 		);
 
@@ -105,14 +105,14 @@ var UpdateForm = React.createClass({
 			<Form type="horizontal" encType="multipart/form-data" method="post" action={formAction} noValidate="true">
 				<input type="hidden" name="action" value="update" />
 				<input type="hidden" name={Keystone.csrf.key} value={Keystone.csrf.value} />
-				<Modal.Header text={'Update ' + itemCount} onClose={this.handleClose} showCloseButton />
+				<Modal.Header text={'更新 ' + itemCount} onClose={this.handleClose} showCloseButton />
 				<Modal.Body>
 					<Select ref="initialFocusTarget" onChange={this.updateOptions} options={this.getOptions()} value={this.state.fields} key="field-select" multi />
 					{this.renderFields()}
 				</Modal.Body>
 				<Modal.Footer>
-					<Button type="primary" submit>Update</Button>
-					<Button type="link-cancel" onClick={this.handleClose}>Cancel</Button>
+					<Button type="primary" submit>更新</Button>
+					<Button type="link-cancel" onClick={this.handleClose}>取消</Button>
 				</Modal.Footer>
 			</Form>
 		);

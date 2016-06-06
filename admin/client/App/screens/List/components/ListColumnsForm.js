@@ -90,14 +90,14 @@ var ListColumnsForm = React.createClass({
 			<InputGroup.Section className={this.props.className}>
 				<Button ref="target" id="listHeaderColumnButton" isActive={this.state.isOpen} onClick={() => this.togglePopout(!this.state.isOpen)}>
 					<span className={this.props.className + '__icon octicon octicon-list-unordered'} />
-					<span className={this.props.className + '__label'}>Columns</span>
+					<span className={this.props.className + '__label'}>可视列</span>
 					<span className="disclosure-arrow" />
 				</Button>
 				<Popout isOpen={this.state.isOpen} onCancel={() => this.togglePopout(false)} relativeToID="listHeaderColumnButton">
-					<Popout.Header title="Columns" />
+					<Popout.Header title="可视列" />
 					<Popout.Body scrollable>
 						<FormField style={{ borderBottom: '1px dashed rgba(0,0,0,0.1)', paddingBottom: '1em' }}>
-							<FormInput ref="search" value={this.state.searchString} onChange={this.updateSearch} placeholder="Find a column..." />
+							<FormInput ref="search" value={this.state.searchString} onChange={this.updateSearch} placeholder="查找列..." />
 						</FormField>
 						<PopoutList>
 							{this.renderColumns()}
@@ -105,9 +105,9 @@ var ListColumnsForm = React.createClass({
 					</Popout.Body>
 					<Popout.Footer
 						primaryButtonAction={this.applyColumns}
-						primaryButtonLabel="Apply"
+						primaryButtonLabel="接受"
 						secondaryButtonAction={() => this.togglePopout(false)}
-						secondaryButtonLabel="Cancel" />
+						secondaryButtonLabel="取消" />
 				</Popout>
 			</InputGroup.Section>
 		);

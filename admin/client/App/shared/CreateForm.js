@@ -95,7 +95,7 @@ const CreateForm = React.createClass({
 						values: {},
 						alerts: {
 							success: {
-								success: 'Item created',
+								success: '创建成功',
 							},
 						},
 					});
@@ -174,7 +174,7 @@ const CreateForm = React.createClass({
 					value={Keystone.csrf.value}
 				/>
 				<Modal.Header
-					text={'Create a new ' + list.singular}
+					text={'创建 ' + list.singular}
 					onClose={this.props.onCancel}
 					showCloseButton
 				/>
@@ -183,12 +183,12 @@ const CreateForm = React.createClass({
 					{form}
 				</Modal.Body>
 				<Modal.Footer>
-					<Button type="success" submit>Create</Button>
+					<Button type="success" submit>创建</Button>
 					<Button
 						type="link-cancel"
 						onClick={this.props.onCancel}
 					>
-						Cancel
+						取消
 					</Button>
 				</Modal.Footer>
 			</Form>

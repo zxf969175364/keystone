@@ -54,7 +54,7 @@ const Filter = React.createClass({
 				/>
 				<Popout isOpen={this.state.isOpen} onCancel={this.close} relativeToID={filterId}>
 					<form onSubmit={this.updateFilter}>
-						<Popout.Header title="Edit Filter" />
+						<Popout.Header title="编辑过滤器" />
 						<Popout.Body>
 							<FilterComponent field={filter.field} filter={this.state.filterValue} onChange={this.updateValue} />
 						</Popout.Body>
@@ -93,7 +93,7 @@ const ListFilters = React.createClass({
 			currentFilters.push(
 				<Pill
 					key="listFilters__clear"
-					label="Clear All"
+					label="清除所有"
 					onClick={this.clearAllFilters}
 				/>
 			);

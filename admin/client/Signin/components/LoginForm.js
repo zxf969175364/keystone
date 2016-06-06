@@ -36,7 +36,7 @@ class LoginForm extends React.Component {
 						type="primary"
 						submit
 					>
-						Sign In
+						登陆
 					</Button>
 					{/* <Button disabled={this.state.animating} type="link-text">Forgot Password?</Button> */}
 				</Form>

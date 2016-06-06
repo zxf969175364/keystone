@@ -81,7 +81,7 @@ export function itemLoadingError () {
 	return (dispatch) => {
 		dispatch({
 			type: ITEM_LOADING_ERROR,
-			err: 'Network request failed',
+			err: '网络请求失败',
 		});
 		setTimeout(() => {
 			dispatch(loadItems());

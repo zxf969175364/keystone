@@ -97,8 +97,8 @@ var EditForm = React.createClass({
 		const confirmationDialog = (
 			<ConfirmationDialog
 				isOpen
-				body={`Are you sure you want to delete <strong>${this.props.data.name}?</strong><br /><br />This cannot be undone.`}
-				confirmationLabel="Delete"
+				body={`是否删除 <strong>${this.props.data.name}?</strong><br /><br />这个操作将不可恢复.`}
+				confirmationLabel="删除"
 				onCancel={this.removeConfirmationDialog}
 				onConfirmation={this.handleDelete}
 			/>
@@ -144,7 +144,7 @@ var EditForm = React.createClass({
 				this.setState({
 					alerts: {
 						success: {
-							success: 'Your changes have been saved successfully',
+							success: '修改保存成功',
 						},
 					},
 					lastValues: this.state.values,
@@ -165,13 +165,13 @@ var EditForm = React.createClass({
 						normal={`${upcase(list.autokey.path)}: `}
 						modified="ID:"
 						component="span"
-						title="Press <alt> to reveal the ID"
+						title="按住 <alt> 查看ID"
 						className="EditForm__key-or-id__label" />
 					<AltText
 						normal={<input ref="keyOrIdInput" onFocus={this.handleKeyFocus} value={this.props.data[list.autokey.path]} className="EditForm__key-or-id__input" readOnly />}
 						modified={<input ref="keyOrIdInput" onFocus={this.handleKeyFocus} value={this.props.data.id} className="EditForm__key-or-id__input" readOnly />}
 						component="span"
-						title="Press <alt> to reveal the ID"
+						title="按住 <alt> 查看ID"
 						className="EditForm__key-or-id__field" />
 				</div>
 			);
@@ -217,7 +217,7 @@ var EditForm = React.createClass({
 			);
 		} else {
 			return wrapNameField(
-				<h2>{this.props.data.name || '(no name)'}</h2>
+				<h2>{this.props.data.name || '(无名称)'}</h2>
 			);
 		}
 	},
@@ -260,22 +260,22 @@ var EditForm = React.createClass({
 				{this.state.loading ? (
 					<span>
 						<Spinner type="inverted" />
-						&nbsp;Saving
+						&nbsp;保存中
 					</span>
 				) : (
-					'Save'
+					'保存'
 				)}
 			</Button>,
 		];
 		buttons.push(
 			<Button key="reset" onClick={this.confirmReset} type="link-cancel">
-				<ResponsiveText hiddenXS="reset changes" visibleXS="reset" />
+				<ResponsiveText hiddenXS="重置修改" visibleXS="重置" />
 			</Button>
 		);
 		if (!this.props.list.nodelete) {
 			buttons.push(
 				<Button key="del" onClick={this.confirmDelete} type="link-delete" className="u-float-right">
-					<ResponsiveText hiddenXS={`delete ${this.props.list.singular.toLowerCase()}`} visibleXS="delete" />
+					<ResponsiveText hiddenXS={`删除 ${this.props.list.singular.toLowerCase()}`} visibleXS="删除" />
 				</Button>
 			);
 		}
@@ -295,8 +295,8 @@ var EditForm = React.createClass({
 			data.createdAt = this.props.data.fields[this.props.list.tracking.createdAt];
 			if (data.createdAt) {
 				elements.push(
-					<FormField key="createdAt" label="Created on">
-						<FormInput noedit title={moment(data.createdAt).format('DD/MM/YYYY h:mm:ssa')}>{moment(data.createdAt).format('Do MMM YYYY')}</FormInput>
+					<FormField key="createdAt" label="创建于">
+						<FormInput noedit title={moment(data.createdAt).format('DD/MM/YYYY h:mm:ssa')}>{moment(data.createdAt).format('DD MMM YYYY')}</FormInput>
 					</FormField>
 				);
 			}
@@ -308,7 +308,7 @@ var EditForm = React.createClass({
 				let createdByName = getNameFromData(data.createdBy.name);
 				if (createdByName) {
 					elements.push(
-						<FormField key="createdBy" label="Created by">
+						<FormField key="createdBy" label="创建于">
 							<FormInput noedit>{data.createdBy.name.first} {data.createdBy.name.last}</FormInput>
 						</FormField>
 					);
@@ -320,8 +320,8 @@ var EditForm = React.createClass({
 			data.updatedAt = this.props.data.fields[this.props.list.tracking.updatedAt];
 			if (data.updatedAt && (!data.createdAt || data.createdAt !== data.updatedAt)) {
 				elements.push(
-					<FormField key="updatedAt" label="Updated on">
-						<FormInput noedit title={moment(data.updatedAt).format('DD/MM/YYYY h:mm:ssa')}>{moment(data.updatedAt).format('Do MMM YYYY')}</FormInput>
+					<FormField key="updatedAt" label="更新于">
+						<FormInput noedit title={moment(data.updatedAt).format('DD/MM/YYYY h:mm:ssa')}>{moment(data.updatedAt).format('DD MMM YYYY')}</FormInput>
 					</FormField>
 				);
 			}
@@ -333,7 +333,7 @@ var EditForm = React.createClass({
 				let updatedByName = getNameFromData(data.updatedBy.name);
 				if (updatedByName) {
 					elements.push(
-						<FormField key="updatedBy" label="Updated by">
+						<FormField key="updatedBy" label="更新于">
 							<FormInput noedit>{data.updatedBy.name.first} {data.updatedBy.name.last}</FormInput>
 						</FormField>
 					);
@@ -343,7 +343,7 @@ var EditForm = React.createClass({
 
 		return Object.keys(elements).length ? (
 			<div className="EditForm__meta">
-				<h3 className="form-heading">Meta</h3>
+				<h3 className="form-heading">元数据</h3>
 				{elements}
 			</div>
 		) : null;

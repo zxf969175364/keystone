@@ -33,4 +33,5 @@ module.exports = {
 	textarea: require('../../../fields/types/textarea/TextareaFilter'),
 	textarray: require('../../../fields/types/textarray/TextArrayFilter'),
 	url: require('../../../fields/types/url/UrlFilter'),
+	ossimage: require('../../../fields/types/ossimage/OssImageFilter'),
 };
