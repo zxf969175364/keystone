@@ -1,42 +1,39 @@
 var _ = require('lodash');
+var fs = require('fs');
+var assign = require('object-assign');
 var keystone = require('../../../');
 var FieldType = require('../Type');
-var fs = require('fs-extra');
 var grappling = require('grappling-hook');
 var moment = require('moment');
-var path = require('path');
 var util = require('util');
 var utils = require('keystone-utils');
+var ALY = require('aliyun-sdk');
 
 /**
  * localfile FieldType Constructor
  * @extends Field
  * @api public
  */
-function ossimage (list, path, options) {
+function ossimage(list, path, options) {
 	grappling.mixin(this).allowHooks('pre:upload');
+
 	this._underscoreMethods = ['format', 'uploadFile'];
 	this._fixedSize = 'full';
 	options.nofilter = true;
 	this.oss = new ALY.OSS(utils.options({
 		accessKeyId: keystone.get('oss-access-key'),
 		secretAccessKey: keystone.get('oss-secret-key'),
-		endpoint: "http://oss-cn-hangzhou.aliyuncs.com",
+		endpoint: "http://oss-cn-beijing.aliyuncs.com",
 		apiVersion: '2013-10-15'
-	},options.oss_config));
+	}, options.oss_config));
 
 	if (options.initial) {
 		throw new Error('Invalid Configuration\n\n'
 			+ 'OSS fields (' + list.key + '.' + path + ') do not currently support being used as initial fields.\n');
 	}
 
-	localfile.super_.call(this, list, path, options);
+	ossimage.super_.call(this, list, path, options);
 
-	// validate destination dirs
-	if (!this.s3config) {
-		throw new Error('Invalid Configuration\n\n'
-			+ 'OSS fields (' + list.key + '.' + path + ') require the "s3 config" option to be set.\n\n');
-	}
 
 	// Allow hook into before and after
 	if (options.pre && options.pre.upload) {
@@ -87,20 +84,6 @@ ossimage.prototype.addToSchema = function () {
 		return item.get(parts.url) ? true : false;
 	};
 
-	var url = function (item) {
-		if (this.bucket && this.range && this.filename) {
-			return `http://${this.bucket}.${this.range}.aliyuncs.com/${this.dir}/${this.filename}`;
-		}
-		return '';
-	};
-
-	var cdnurl = function (item) {
-		if (this.cdn && this.filename) {
-			return `http://${this.cdn}/${this.dir}/${this.filename}`;
-		}
-		return url(item);
-	};
-
 	var reset = function (item) {
 		item.set(field.path, {
 			filename: '',
@@ -115,14 +98,6 @@ ossimage.prototype.addToSchema = function () {
 	// The .exists virtual indicates whether a file is stored
 	schema.virtual(paths.exists).get(function () {
 		return schemaMethods.exists.apply(this);
-	});
-
-	schema.virtual(paths.url).get(function () {
-		return schemaMethods.url.apply(this);
-	});
-
-	schema.virtual(paths.cdnurl).get(function () {
-		return schemaMethods.cdnurl.apply(this);
 	});
 
 	var schemaMethods = {
@@ -145,11 +120,11 @@ ossimage.prototype.addToSchema = function () {
 		delete: function () {
 			if (exists(this)) {
 				this.oss.deleteObject({
-						Bucket: this.bucket,
-						Key: '/'.join([this.get(paths.dir), this.get(paths.filename)]),
-					}, function(err, res){
-						if(err) throw err;
-					});
+					Bucket: this.bucket,
+					Key: '/'.join([this.get(paths.dir), this.get(paths.filename)]),
+				}, function (err, res) {
+					if (err) throw err;
+				});
 			}
 			reset(this);
 		},
@@ -198,14 +173,13 @@ ossimage.prototype.isModified = function (item) {
 	return item.isModified(this.paths.cdnurl);
 };
 
-
 /**
  * Validates that a value for this field has been provided in a data object
  *
  * Deprecated
  */
 ossimage.prototype.inputIsValid = function (data) { // eslint-disable-line no-unused-vars
-	// TODO - how should file field input be validated?
+													// TODO - how should file field input be validated?
 	return true;
 };
 
@@ -215,7 +189,7 @@ ossimage.prototype.inputIsValid = function (data) { // eslint-disable-line no-un
  * @api public
  */
 ossimage.prototype.updateItem = function (item, data, callback) { // eslint-disable-line no-unused-vars
-	// TODO - direct updating of data (not via upload)
+																  // TODO - direct updating of data (not via upload)
 	process.nextTick(callback);
 };
 
@@ -225,11 +199,11 @@ ossimage.prototype.updateItem = function (item, data, callback) { // eslint-disa
 ossimage.prototype.uploadFile = function (item, file, update, callback) {
 
 	var field = this;
-	var endpoint = field.options.endpoint;
-	var cdn = field.options.cdn;
-	var bucket = field.options.bucket;
-	var dir = field.options.dir ? field.options.dir + '/' : '';
-	var prefix = field.options.datePrefix ? moment().format(field.options.datePrefix) + '-' : '';
+	var endpoint = field.options.oss_config.endpoint;
+	var cdn = field.options.oss_config.cdn;
+	var bucket = field.options.oss_config.bucket;
+	var dir = field.options.oss_config.dir ? field.options.oss_config.dir  : '';
+	var prefix = field.options.oss_config.datePrefix ? moment().format(field.options.oss_config.datePrefix) + '-' : '';
 	var filename = prefix + file.name;
 	var originalname = file.originalname;
 	var filetype = file.mimetype || file.type;
@@ -239,13 +213,13 @@ ossimage.prototype.uploadFile = function (item, file, update, callback) {
 		update = false;
 	}
 
-	if (field.options.allowedTypes && !_.contains(field.options.allowedTypes, filetype)) {
+	if (field.options.allowedTypes && _.indexOf(field.options.allowedTypes, filetype) < 0) {
 		return callback(new Error('Unsupported File Type: ' + filetype));
 	}
 
 	var doUpload = function () {
 
-		if (typeof field.options.dir === 'function') {
+		if (typeof field.options.oss_config.dir === 'function') {
 			dir = field.options.path(item, dir);
 		}
 
@@ -253,46 +227,50 @@ ossimage.prototype.uploadFile = function (item, file, update, callback) {
 			filename = field.options.filename(item, filename, originalname);
 		}
 
-		oss.putObject(_.extends({
-				Bucket: field.options.bucket,
-				Key: dir + filename,
-				Body: file,
-				AccessControlAllowOrigin: '',
-				ContentType: field.type,
-				ContentDisposition: '',
-				ContentEncoding: 'utf-8',
-				Expires: null
-			}, field.options.oss_upload),
-			function (err, data) {
-				if (err) return callback(err);
-				if (cdn) {
-					url = `${cdn}/${dir}/${filename}`;
-				}
-				if (endpoint && bucket) {
-					url = `${bucket}.${endpoint}/${dir}/${filename}`;
-				}
+		fs.readFile(file.path, function (err, data) {
+			field.oss.putObject({
+					Bucket: field.options.oss_config.bucket,
+					Key: dir + '/' + filename,
+					Body: data,
+					AccessControlAllowOrigin: '',
+					ContentType: filetype,
+					ContentDisposition: '',
+					ContentEncoding: 'utf-8',
+					Expires: null
+				},
+				function (err, data) {
+					if (err) return callback(err);
+					if (cdn) {
+						url = `http://${cdn}/${dir}/${filename}`;
+					}
+					else if (endpoint && bucket) {
+						url = `http://${bucket}.${endpoint}/${dir}/${filename}`;
+					}
 
-				var fileData = {
-					filename: filename,
-					originalname: originalname,
-					dir: dir,
-					size: file.size,
-					filetype: filetype,
-					url: url,
-				};
+					var fileData = {
+						filename: filename,
+						originalname: originalname,
+						dir: dir,
+						size: file.size,
+						filetype: filetype,
+						url: url,
+					};
 
-				if (update) {
-					item.set(field.path, fileData);
-				}
+					if (update) {
+						item.set(field.path, fileData);
+					}
 
-				callback(null, fileData);
-			});
+					callback(null, fileData);
+				});
+		})
 
-		this.callHook('pre:upload', item, file, function (err) {
-			if (err) return callback(err);
-			doUpload();
-		});
+
 	};
+
+	this.callHook('pre:upload', item, file, function (err) {
+		if (err) return callback(err);
+		doUpload();
+	});
 };
 
 /**
@@ -307,13 +285,15 @@ ossimage.prototype.getRequestHandler = function (item, req, paths, callback) {
 	var field = this;
 
 	if (utils.isFunction(paths)) {
+
 		callback = paths;
 		paths = field.paths;
 	} else if (!paths) {
 		paths = field.paths;
 	}
 
-	callback = callback || function () {};
+	callback = callback || function () {
+		};
 
 	return function () {
 

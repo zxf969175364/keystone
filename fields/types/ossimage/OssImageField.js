@@ -191,7 +191,7 @@ module.exports = Field.create({
 		var url = this.getImageURL();
 
 		if (url) {
-			body = <a className="img-thumbnail" href={this.getImageURL()} onClick={this.openLightbox.bind(this, 0)} target="__blank">{body}</a>;
+			body = <a className="img-thumbnail" onClick={this.openLightbox.bind(this, 0)} >{body}</a>;
 		} else {
 			body = <div className="img-thumbnail">{body}</div>;
 		}
@@ -305,7 +305,7 @@ module.exports = Field.create({
 			<div key={this.props.path + '_toolbar'} className="image-toolbar">
 				<div className="u-float-left">
 					<Button onClick={this.changeImage}>
-						{this.hasImage() ? '修改' : '上传'} Image
+						{this.hasImage() ? '修改' : '上传'} 图片
 					</Button>
 					{this.hasImage() && this.renderClearButton()}
 				</div>
