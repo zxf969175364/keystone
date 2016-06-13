@@ -199,10 +199,10 @@ ossimage.prototype.updateItem = function (item, data, callback) { // eslint-disa
 ossimage.prototype.uploadFile = function (item, file, update, callback) {
 
 	var field = this;
-	var endpoint = field.options.oss_config.endpoint;
-	var cdn = field.options.oss_config.cdn;
-	var bucket = field.options.oss_config.bucket;
-	var dir = field.options.oss_config.dir ? field.options.oss_config.dir  : '';
+	var endpoint = field.options.oss_config.endpoint ? field.options.oss_config.endpoint : keystone.get('oss-endpoint') ;
+	var cdn = field.options.oss_config.cdn ? field.options.oss_config.cdn : keystone.get('oss-cdn');
+	var bucket = field.options.oss_config.bucket ? field.options.oss_config.bucket : keystone.get('oss-bucket');
+	var dir = field.options.oss_config.dir ? field.options.oss_config.dir : keystone.get('oss-dir');
 	var prefix = field.options.oss_config.datePrefix ? moment().format(field.options.oss_config.datePrefix) + '-' : '';
 	var filename = prefix + file.name;
 	var originalname = file.originalname;
@@ -229,7 +229,7 @@ ossimage.prototype.uploadFile = function (item, file, update, callback) {
 
 		fs.readFile(file.path, function (err, data) {
 			field.oss.putObject({
-					Bucket: field.options.oss_config.bucket,
+					Bucket: field.options.oss_config.bucket ? field.options.oss_config.bucket : keystone.get('oss-bucket'),
 					Key: dir + '/' + filename,
 					Body: data,
 					AccessControlAllowOrigin: '',
