@@ -41,7 +41,7 @@ function ossimage(list, path, options) {
 	}
 
 }
-
+ossimage.properName = 'OssImage';
 util.inherits(ossimage, FieldType);
 
 /**
