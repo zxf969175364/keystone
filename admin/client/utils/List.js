@@ -144,14 +144,20 @@ List.prototype.expandColumns = function (input) {
 		if (path === '__name__') {
 			path = this.namePath;
 		}
-		if (path === this.namePath) {
-			nameIncluded = true;
-		}
 		const field = this.fields[path];
 		if (!field) {
 			// TODO: Support arbitary document paths
-			console.warn('Invalid Column specified:', i);
+			if (!this.hidden) {
+				if (path === this.namePath) {
+					console.warn(`List ${this.key} did not specify any default columns or a name field`);
+				} else {
+					console.warn(`List ${this.key} specified an invalid default column: ${path}`);
+				}
+			}
 			return;
+		}
+		if (path === this.namePath) {
+			nameIncluded = true;
 		}
 		return {
 			field: field,

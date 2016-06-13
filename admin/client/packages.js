@@ -7,6 +7,7 @@ admin/server/middleware/browserify.js
 */
 
 module.exports = [
+	'@jedwatson/react-color',
 	'async',
 	'blacklist',
 	'bytes',
@@ -15,7 +16,6 @@ module.exports = [
 	'display-name',
 	'elemental',
 	'expression-match',
-	'history',
 	'i',
 	'list-to-array',
 	'lodash',
@@ -25,16 +25,17 @@ module.exports = [
 	'qs',
 	'react-addons-css-transition-group',
 	'react-alt-text',
-	'@jedwatson/react-color',
 	'react-day-picker',
-	'react-dnd',
 	'react-dnd-html5-backend',
+	'react-dnd',
 	'react-dom',
 	'react-redux',
+	'react-router',
+	'react-router-redux',
 	'react-select',
 	'react',
-	'redux',
 	'redux-thunk',
+	'redux',
 	'vkey',
 	'xhr',
 ];

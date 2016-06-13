@@ -11,10 +11,10 @@ import {
 	Row,
 	Spinner,
 } from 'elemental';
+import { Fields } from 'FieldTypes';
 
 import AlertMessages from '../../../shared/AlertMessages';
 import ConfirmationDialog from './../../../shared/ConfirmationDialog';
-import Fields from 'FieldTypes';
 
 import FormHeading from './FormHeading';
 import AltText from './AltText';
@@ -162,16 +162,20 @@ var EditForm = React.createClass({
 			return (
 				<div className={className}>
 					<AltText
-						normal={`${upcase(list.autokey.path)}: `}
-						modified="ID:"
 						component="span"
 						title="按住 <alt> 查看ID"
+						modifiedLabel="ID:"
+						modifiedValue={null}
+						normalLabel={`${upcase(list.autokey.path)}: `}
+						normalValue={null}
 						className="EditForm__key-or-id__label" />
 					<AltText
-						normal={<input ref="keyOrIdInput" onFocus={this.handleKeyFocus} value={this.props.data[list.autokey.path]} className="EditForm__key-or-id__input" readOnly />}
-						modified={<input ref="keyOrIdInput" onFocus={this.handleKeyFocus} value={this.props.data.id} className="EditForm__key-or-id__input" readOnly />}
 						component="span"
 						title="按住 <alt> 查看ID"
+						modifiedLabel=""
+						modifiedValue={<input ref="keyOrIdInput" onFocus={this.handleKeyFocus} value={this.props.data.id} className="EditForm__key-or-id__input" readOnly />}
+						normalLabel={null}
+						normalValue={<input ref="keyOrIdInput" onFocus={this.handleKeyFocus} value={this.props.data[list.autokey.path]} className="EditForm__key-or-id__input" readOnly />}
 						className="EditForm__key-or-id__field" />
 				</div>
 			);
