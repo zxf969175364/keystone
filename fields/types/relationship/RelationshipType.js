@@ -202,13 +202,13 @@ relationship.prototype.validateRequiredInput = function (item, data, callback) {
  */
 relationship.prototype.inputIsValid = function (data, required, item) {
 	if (!required) return true;
-	if (!(this.path in data) && item && ((this.many && item.get(this.path).length) || item.get(this.path))) return true;
 	if (typeof data[this.path] === 'string') {
 		return (data[this.path].trim()) ? true : false;
 	} else {
 		return (data[this.path]) ? true : false;
 	}
 };
+
 
 /**
  * Updates the value for this field in the item from a data object.

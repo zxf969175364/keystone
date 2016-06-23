@@ -178,9 +178,11 @@ ossimage.prototype.isModified = function (item) {
  *
  * Deprecated
  */
-ossimage.prototype.inputIsValid = function (data) { // eslint-disable-line no-unused-vars
-													// TODO - how should file field input be validated?
-	return true;
+ossimage.prototype.inputIsValid = function (data, required, item) { // eslint-disable-line no-unused-vars
+	if (!required) return true;
+
+	return data.files ? (data.files[this.paths.upload] ? true : false) : false;
+
 };
 
 /**

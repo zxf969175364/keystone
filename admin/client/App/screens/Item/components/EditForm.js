@@ -300,7 +300,7 @@ var EditForm = React.createClass({
 			if (data.createdAt) {
 				elements.push(
 					<FormField key="createdAt" label="创建于">
-						<FormInput noedit title={moment(data.createdAt).format('DD/MM/YYYY h:mm:ssa')}>{moment(data.createdAt).format('DD MMM YYYY')}</FormInput>
+						<FormInput noedit title={moment(data.createdAt).format('YYYY-MM-DD HH:mm:ss')}>{moment(data.createdAt).format('YYYY-MM-DD HH:mm:ss')}</FormInput>
 					</FormField>
 				);
 			}
@@ -325,7 +325,7 @@ var EditForm = React.createClass({
 			if (data.updatedAt && (!data.createdAt || data.createdAt !== data.updatedAt)) {
 				elements.push(
 					<FormField key="updatedAt" label="更新于">
-						<FormInput noedit title={moment(data.updatedAt).format('DD/MM/YYYY h:mm:ssa')}>{moment(data.updatedAt).format('DD MMM YYYY')}</FormInput>
+						<FormInput noedit title={moment(data.updatedAt).format('YYYY-MM-DD HH:mm:ss')}>{moment(data.updatedAt).format('YYYY-MM-DD HH:mm:ss')}</FormInput>
 					</FormField>
 				);
 			}
