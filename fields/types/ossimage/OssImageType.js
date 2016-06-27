@@ -180,9 +180,9 @@ ossimage.prototype.isModified = function (item) {
  */
 ossimage.prototype.inputIsValid = function (data, required, item) { // eslint-disable-line no-unused-vars
 	if (!required) return true;
-
+	if(data[this.paths.action]==='reset') return false;
+	if (item[this.path] && item[this.path].url) return true;
 	return data.files ? (data.files[this.paths.upload] ? true : false) : false;
-
 };
 
 /**

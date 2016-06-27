@@ -203,8 +203,7 @@ module.exports = Field.create({
 		var url = this.getImageURL();
 
 		if (url) {
-			// add cloudinary thumbnail parameters to the url
-			url += '@90h_90w_0e'
+
 		} else {
 			url = this.getImageSource();
 		}
@@ -274,7 +273,7 @@ module.exports = Field.create({
 		if (this.state.removeExisting) {
 			return (
 				<Button type="link" onClick={this.undoRemove}>
-					Undo Remove
+					取消删除
 				</Button>
 			);
 		} else {
